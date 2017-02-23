@@ -1,0 +1,38 @@
+<template name="registration">
+  <div class="container">
+  <div class="row">
+      <form class="col registration" id="registration">
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="" id="first_name" type="text" class="validate">
+            <label for="first_name">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="last_name" type="text" class="validate">
+            <label for="last_name">Last Name</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="business_name" type="text" class="validate">
+            <label for="business_name">Business Name</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="username" type="tel" class="validate">
+            <label for="username">Phone number</label>
+          </div>
+        </div>
+        <input type="submit" class="waves-effect waves-light btn">
+        <a class="waves-effect waves-light btn register">Register</a>
+        <a class="waves-effect waves-light btn" onclick="form.reset();">Clear</a>
+      </form>
+    </div>
+  </div>
+  <script>
+    function reset(){
+      Materialize.updateTextFields();
+    }
+  </script>
+</template>
+
+<template name="insertUserForm">
+  {{> quickForm collection="Users" id="inserUserForm" type="insert"}}
+</template>

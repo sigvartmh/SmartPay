@@ -1,0 +1,18 @@
+<template name="users">
+  <div class="container">
+  <ul class="collection">
+     {{#each users}}
+       {{> user}}
+     {{/each}}
+   </ul>
+ </div>
+</template>
+
+<template name="user">
+  <li class="collection-item avatar">
+    <i class="material-icons circle">?</i>
+    <span class="title">{{first_name}} {{last_name}}</span>
+    <p>{{username}}<br />
+    {{business_name}}</p>
+  </li>
+</template>
