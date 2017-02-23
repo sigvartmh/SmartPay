@@ -2,6 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 Users = new Mongo.Collection('user_accounts');
+Business = new Mongo.Collection('business_accounts')
 
 const Schemas = {};
 
@@ -23,7 +24,7 @@ Schemas.UserSchema = new SimpleSchema({
 
 Users.attachSchema(Schemas.UserSchema);
 
-BusinessSchema = new SimpleSchema([Schemas.UserSchema],{
+const BusinessSchema = new SimpleSchema([Schemas.UserSchema],{
   business:{
     type: String,
     label: "Business name"
@@ -34,6 +35,7 @@ BusinessSchema = new SimpleSchema([Schemas.UserSchema],{
     optional: true
   }
 });
+Business.attachSchema(BusinessSchema);
 
 //http://www.bitboost.com/ref/international-address-formats.html#UPU
 const PakistanAddressSchema = new SimpleSchema({
