@@ -4,9 +4,40 @@ import SimpleSchema from 'simpl-schema';
 Users = new Mongo.Collection('user_accounts');
 Business = new Mongo.Collection('business_accounts')
 
-const Schemas = {};
+Business.attachSchema(BusinessSchema);
+Users.attachSchema(UserSchema);
 
-Schemas.UserSchema = new SimpleSchema({
+const MobileWalletSchema = new SimpleSchema({
+  provider:{
+    type: String,
+    label: "Provider of mobile wallet"
+  },
+  amount:{
+    type: Number,
+    label: "Amount of mobile cash in wallet"
+  },
+  account:{
+    type: String,
+    label: "Key to mobile wallet of provider"
+  }
+})
+
+const AccountSchema = new SimpleSchema({
+  amount:{
+    type: Number,
+    label: "Amount of mobile cash"
+  },
+  verified:{
+    type: Boolean,
+    label: "Account has attached phone number"
+  },
+  mobileWallets:{
+    type: [MobileWalletSchema],
+    label: "Collection of mobile-wallets connected to account"
+  }
+})
+
+const UserSchema = new SimpleSchema({
   username:{
     type: Number,
     label: "Phone number"
@@ -20,11 +51,15 @@ Schemas.UserSchema = new SimpleSchema({
     type: String,
     label: "Surname"
   },
+  account:{
+    type: AccountSchema,
+    label: "Connected mobile account"
+  }
 });
 
-Users.attachSchema(Schemas.UserSchema);
 
-const BusinessSchema = new SimpleSchema([Schemas.UserSchema],{
+
+const BusinessSchema = new SimpleSchema([UserSchema],{
   business:{
     type: String,
     label: "Business name"
@@ -35,7 +70,7 @@ const BusinessSchema = new SimpleSchema([Schemas.UserSchema],{
     optional: true
   }
 });
-Business.attachSchema(BusinessSchema);
+
 
 //http://www.bitboost.com/ref/international-address-formats.html#UPU
 const PakistanAddressSchema = new SimpleSchema({
@@ -61,3 +96,12 @@ const PakistanAddressSchema = new SimpleSchema({
    max: 50
  }
 });
+
+const TransactionSchema = new SimpleSchema({
+  amount:{
+    type: Number,
+  },
+  seller:{
+    type: BusinessSchema,
+  }
+})
