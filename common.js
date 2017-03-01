@@ -5,10 +5,6 @@ Users = new Mongo.Collection('user_accounts');
 Business = new Mongo.Collection('business_accounts')
 Transactions = new Mongo.Collection('transactions')
 
-Business.attachSchema(BusinessSchema);
-Users.attachSchema(UserSchema);
-Transactions.attachSchema(TransactionSchema);
-
 const MobileWalletSchema = new SimpleSchema({
   provider:{
     type: String,
@@ -110,3 +106,7 @@ const TransactionSchema = new SimpleSchema({
     type: UserSchema,
   }
 });
+
+Business.attachSchema(BusinessSchema);
+Users.attachSchema(UserSchema);
+Transactions.attachSchema(TransactionSchema);
