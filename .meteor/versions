@@ -51,6 +51,7 @@ logging@1.1.17
 materialize:materialize@0.98.0
 meteor@1.6.1
 meteor-base@1.0.4
+meteorhacks:picker@1.0.3
 minifier-css@1.2.16
 minifier-js@1.2.17
 minimongo@1.0.20
