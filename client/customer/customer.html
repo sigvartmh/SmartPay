@@ -1,0 +1,31 @@
+<template name="insertCustomerForm">
+  <div class="container">
+    <!--{{> quickForm collection="Customers" id="insertCustomerForm" type="insert"}}-->
+    {{#autoForm collection="Customers" id="insertCustomerForm" type="insert"}}
+      <fieldset>
+        <legend>Register customer</legend>
+        {{> afQuickField name='username'}}
+        {{> afQuickField name='first_name'}}
+        {{> afQuickField name='last_name'}}
+      </fieldset>
+      <button class="waves-effect waves-light btn" type="submit">Insert</button>
+      {{/autoForm}}
+  </div>
+</template>
+
+<template name="listAllCustomers">
+  <div class="container">
+  <ul class="collection">
+    {{#each customers}}
+      {{> customer}}
+    {{/each}}
+  </ul>
+  </div>
+</template>
+<template name="customer">
+  <li class="collection-item avatar">
+    <i class="material-icons circle">?</i>
+    <span class="title">{{first_name}} {{last_name}}</span>
+    <p>{{username}}</p>
+  </li>
+</template>
