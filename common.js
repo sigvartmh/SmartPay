@@ -3,9 +3,11 @@ import SimpleSchema from 'simpl-schema';
 
 Users = new Mongo.Collection('user_accounts');
 Business = new Mongo.Collection('business_accounts')
+Transactions = new Mongo.Collection('transactions')
 
 Business.attachSchema(BusinessSchema);
 Users.attachSchema(UserSchema);
+Transactions.attachSchema(TransactionSchema);
 
 const MobileWalletSchema = new SimpleSchema({
   provider:{
@@ -16,11 +18,11 @@ const MobileWalletSchema = new SimpleSchema({
     type: Number,
     label: "Amount of mobile cash in wallet"
   },
-  account:{
+  apikey:{
     type: String,
     label: "Key to mobile wallet of provider"
   }
-})
+});
 
 const AccountSchema = new SimpleSchema({
   amount:{
@@ -31,11 +33,11 @@ const AccountSchema = new SimpleSchema({
     type: Boolean,
     label: "Account has attached phone number"
   },
-  mobileWallets:{
-    type: [MobileWalletSchema],
+  mobileWallets: {
+    type: Array,
     label: "Collection of mobile-wallets connected to account"
   }
-})
+});
 
 const UserSchema = new SimpleSchema({
   username:{
@@ -103,5 +105,8 @@ const TransactionSchema = new SimpleSchema({
   },
   seller:{
     type: BusinessSchema,
+  },
+  buyer:{
+    type: UserSchema,
   }
-})
+});
