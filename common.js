@@ -6,7 +6,6 @@ Business = new Mongo.Collection('business_accounts');
 Transactions = new Mongo.Collection('transactions');
 Customers = new Mongo.Collection('customers');
 
-
 const MobileWalletSchema = new SimpleSchema({
   provider:{
     type: String,
