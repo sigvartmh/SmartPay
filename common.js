@@ -2,8 +2,9 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 Users = new Mongo.Collection('user_accounts');
-Business = new Mongo.Collection('business_accounts')
-Transactions = new Mongo.Collection('transactions')
+Business = new Mongo.Collection('business_accounts');
+Transactions = new Mongo.Collection('transactions');
+Customers = new Mongo.Collection('customers');
 
 const MobileWalletSchema = new SimpleSchema({
   provider:{
@@ -51,7 +52,8 @@ const UserSchema = new SimpleSchema({
   },
   account:{
     type: AccountSchema,
-    label: "Connected mobile account"
+    label: "Connected mobile account",
+    optional: true
   }
 });
 
@@ -110,3 +112,4 @@ const TransactionSchema = new SimpleSchema({
 Business.attachSchema(BusinessSchema);
 Users.attachSchema(UserSchema);
 Transactions.attachSchema(TransactionSchema);
+Customers.attachSchema(UserSchema);
