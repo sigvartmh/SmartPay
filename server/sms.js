@@ -4,12 +4,17 @@ import { Accounts } from 'meteor/accounts-base';
 import bodyParser from 'body-parser';
 import { Picker } from 'meteor/meteorhacks:picker';
 
-Picker.middleware(bodyParser.json());
+console.log(bodyParser);
+Picker.middleware(bodyParser.urlencoded({extended: false}));
 
-Picker.route('/sms/recive/:number', ({ number }, request, response) => {
-    console.log("test", number);
+Picker.route('/sms/recive/', ({}, request, response) => {
+    console.log("test");
     response.statusCode = 200;
     console.log(request);
     console.log(request.method);
-    response.end(String(request.body));
+    console.log(request.body);
+    console.log(request.body.Body);
+    console.log(request.body.From);
+    console.log(request.body.To);
+    response.end();
 });
