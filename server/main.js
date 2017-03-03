@@ -2,14 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 const twilio = require('twilio') ;
 
-const twilio_sid = 'fillout';
-const twilio_auth = 'fillout';
-const twilio_number = "fillout";
-process.env.TWILIO_ACCOUNT_SID=twilio_sid;
-process.env.TWILIO_AUTH_TOKEN=twilio_auth;
+const twilio_sid = process.env.TWILIO_SID;
+const twilio_auth = process.env.TWILIO_AUTH_TOKEN;
+const twilio_number = process.env.TWILIO_NUMBER;
 console.log(twilio_sid);
-console.log(twilio_auth);
-let client = new twilio.RestClient(twilio_sid, twilio_auth);
+console.log(twilio_auth)
+const client = new twilio.RestClient(twilio_sid, twilio_auth);
 
 
 Meteor.startup(() => {
