@@ -19,7 +19,12 @@ Template.registration.events({
       console.log(res);
       if(res){
         Materialize.updateTextFields();
+        Materialize.toast(res, 4000);
       }
     });
+    for(let i=0; i<event.target.elements.length-1; i++){
+      event.target.elements.item(i).value = '';
+    }
+
   }
 });

@@ -1,0 +1,17 @@
+<template name="inbox">
+  <div class="container">
+  <ul class="collection">
+     {{#each getInbox}}
+       {{> sms}}
+     {{/each}}
+   </ul>
+ </div>
+</template>
+
+<template name="sms">
+  <li class="collection-item avatar">
+    <i class="material-icons circle">?</i>
+    <span class="title">{{From}}</span>
+    <p>{{msg}}</p>
+  </li>
+</template>

@@ -5,6 +5,7 @@ Users = new Mongo.Collection('user_accounts');
 Business = new Mongo.Collection('business_accounts');
 Transactions = new Mongo.Collection('transactions');
 Customers = new Mongo.Collection('customers');
+Inbox = new Mongo.Collection('recived_sms')
 
 const MobileWalletSchema = new SimpleSchema({
   provider:{
@@ -39,7 +40,8 @@ const AccountSchema = new SimpleSchema({
 const UserSchema = new SimpleSchema({
   username:{
     type: Number,
-    label: "Phone number"
+    label: "Phone number",
+    unique: true
   },
   //Unsure if we want this
   first_name:{
@@ -49,6 +51,10 @@ const UserSchema = new SimpleSchema({
   last_name:{
     type: String,
     label: "Surname"
+  },
+  password:{
+    type: String,
+    label: "Password"
   },
   account:{
     type: AccountSchema,
@@ -109,7 +115,17 @@ const TransactionSchema = new SimpleSchema({
   }
 });
 
+const SMSSchema = new SimpleSchema({
+  from:{
+    type: String
+  },
+  msg:{
+    type: String
+  }
+});
+
 Business.attachSchema(BusinessSchema);
 Users.attachSchema(UserSchema);
 Transactions.attachSchema(TransactionSchema);
 Customers.attachSchema(UserSchema);
+Inbox.attachSchema(SMSSchema);

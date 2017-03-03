@@ -8,8 +8,17 @@ Template.sendSMS.events({
     event.preventDefault();
     const target = event.target;
     const text = target.text.value;
+    const phone_number = '+47' + target.phone_number.value;
+    console.log(phone_number);
     console.log(text);
     target.text.value = '';
-    Meteor.call('sms.send','+4792683864',text);
+    target.phone_number.value = '';
+    Meteor.call('sms.send',phone_number,text);
   }
 })
+
+Template.inbox.helpers({
+  getInbox() {
+    return Inbox.find({});
+  },
+});
