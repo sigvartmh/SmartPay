@@ -29,3 +29,4 @@ accounts-password@1.3.4
 aldeed:collection2-core@2.0.0
 aldeed:autoform
 meteorhacks:picker
+aldeed:schema-index
