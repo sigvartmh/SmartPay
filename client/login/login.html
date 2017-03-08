@@ -1,9 +1,10 @@
 <template name="secure_login">
   <div class="container">
     <div class="row" style="margin-top: 5cm;">
+      <form class="login">
       <div class="col s12">
         <div class="input-field col s6 offset-s3">
-                  <input id="phone_number" type="email" class="validate">
+                  <input id="phone_number" type="text" class="validate">
                   <label for="phone_number">Phone Number</label>
                 </div>      </div>
       <div class="input-field col s6 offset-s3">
@@ -11,8 +12,9 @@
           <label for="password">Password</label>
         </div>
         <div class="col s6 offset-s3" style="margin-top: 0.5cm;">
-          <button class="btn red accent-1 waves-effect waves-light">Login</button>
+          <input class="btn red accent-1 waves-effect waves-light" type="submit" value="Login" />
         </div>
+      </form>
     </div>
   </div>
 </template>
