@@ -7,15 +7,15 @@ import { Picker } from 'meteor/meteorhacks:picker';
 console.log(bodyParser);
 Picker.middleware(bodyParser.urlencoded({extended: false}));
 Picker.route('/sms/recive/', ({}, request, response) => {
-    console.log("test");
+    //console.log("test");
     response.statusCode = 200;
     response.end();
-    console.log("recived sms", request);
-    console.log(request.method);
-    console.log(request.body);
-    console.log(request.body.Body);
-    console.log(request.body.From);
-    console.log(request.body.To);
+    //console.log("recived sms", request);
+    //console.log(request.method);
+    console.log("Recived SMS: ", request.body);
+    //console.log(request.body.Body);
+    //console.log(request.body.From);
+    //console.log(request.body.To);
 
     sms = {
       msg: request.body.Body,
@@ -31,5 +31,10 @@ Picker.route('/sms/recive/', ({}, request, response) => {
         console.log(res);
       }
     });
+    let customer = sms.from;
+    customer.replace("+47", "");
+    console.log(customer)
+    activeTransaction = Transactions.findOne({sender: customer});
+    console.log("Active record: ", activeTransaction )
 
 });

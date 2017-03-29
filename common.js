@@ -4,6 +4,7 @@ import SimpleSchema from 'simpl-schema';
 Users = new Mongo.Collection('user_accounts');
 Business = new Mongo.Collection('business_accounts');
 Transactions = new Mongo.Collection('transactions');
+TransactionHistory = new Mongo.Collection('transaction_history');
 Customers = new Mongo.Collection('customers');
 Inbox = new Mongo.Collection('recived_sms')
 Codes = new Mongo.Collection('verification_codes');
