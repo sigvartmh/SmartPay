@@ -1,3 +1,29 @@
 <template name="insertTransactionForm">
   {{> quickForm collection="Transactions" id="insertTransactionForm" type="insert"}}
 </template>
+
+<template name="requestPayment">
+  <div class="container">
+    <div class="row">
+    <ul class="collection">
+    <li class="collection-item avatar">
+      <img src="/images/yuna.jpg" alt="" class="circle">
+      <span class="title">{{ customer.name }}</span>
+      <p>{{ customer.phone }}
+      </p>
+    </li>
+  </ul>
+      <center>
+  <form class="transaction">
+  <div class="input-field col s12">
+      <input id="amount" type="number" class="validate">
+      <label for="amount">Amount</label>
+    </div>
+    <div class="col s12" style="margin-top: 0.5cm;">
+      <input class="btn blue accent-1 waves-effect waves-light" type="submit" value="Request" />
+    </div>
+  </form>
+    </center>
+  </div>
+  </div>
+</template>

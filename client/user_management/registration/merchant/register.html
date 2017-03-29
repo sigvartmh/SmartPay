@@ -2,7 +2,7 @@
   <div class="container">
     <center><h4>Register your business</h4></center>
     <div class="row" style="margin-top: 0.5cm;">
-      <form class="login">
+      <form class="register">
         <div class="input-field col s6 offset-s3">
             <input id="business_name" type="text" class="validate">
             <label for="business_name">Business Name</label>
@@ -16,8 +16,8 @@
           <label for="password">Password</label>
         </div>
         <div class="input-field col s6 offset-s3">
-            <input id="passwordAgain" type="password" class="validate">
-            <label for="passwordAgain">Password (again)</label>
+            <input id="password_again" type="password" class="validate">
+            <label for="password_again">Password (again)</label>
           </div>
         <div class="col s6 offset-s3" style="margin-top: 0.5cm;">
           <input class="btn red accent-1 waves-effect waves-light" type="submit" value="Register" />
@@ -25,4 +25,40 @@
       </form>
     </div>
   </div>
+</template>
+
+<template name="merchant_sms_verification">
+  <div class="container">
+  <div class="row" style="margin-top: 0.5cm;">
+    <form class="verify">
+  <div class="input-field col s4 offset-s4">
+      <input id="sms_code" type="password" class="validate" style="text-align: center;">
+      <label for="sms_code">SMS-code</label>
+  </div>
+  <div class="col s8 offset-s4" style="margin-top: 0.5cm;">
+
+    <input class="btn red accent-1 waves-effect waves-light" type="submit" value="verify" />
+  </div>
+</form>
+</div>
+  </div>
+</template>
+
+<template name="merchant_friends">
+    <div class="container">
+    <ul class="collection">
+       {{#each friends}}
+         {{> friend}}
+       {{/each}}
+     </ul>
+   </div>
+</template>
+
+<template name="friend">
+  <li class="collection-item avatar">
+    <i class="material-icons circle">?</i>
+    <span class="title">{{ name }}</span>
+    <p>{{ phone }}<br />
+    {{ CNIC }}</p>
+  </li>
 </template>

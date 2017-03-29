@@ -29,3 +29,46 @@
     <p>{{username}}</p>
   </li>
 </template>
+
+<template name="customer_register">
+  <div class="container">
+    <center><h4>Register a customer</h4></center>
+    Logged inn as {{ user.profile.name }}
+    <div class="row" style="margin-top: 0.5cm;">
+      <form class="register">
+        <div class="input-field col s6 offset-s3">
+            <input id="customer_name" type="text" class="validate">
+            <label for="customer_name">Name</label>
+        </div>
+        <div class="input-field col s6 offset-s3">
+                  <input id="phone_number" type="text" class="validate">
+                  <label for="phone_number">Phone Number</label>
+        </div>
+        <div class="input-field col s6 offset-s3">
+                  <input id="cnic_number" type="text" class="validate">
+                  <label for="cnic_number">CNIC-Number</label>
+        </div>
+        <div class="col s6 offset-s3" style="margin-top: 0.5cm;">
+          <input class="btn red accent-1 waves-effect waves-light" type="submit" value="Register" />
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
+<template name="customer_sms_verification">
+  <div class="container">
+  <div class="row" style="margin-top: 0.5cm;">
+    <form class="verify">
+  <div class="input-field col s4 offset-s4">
+      <input id="sms_code" type="password" class="validate" style="text-align: center;">
+      <label for="sms_code">SMS-code</label>
+  </div>
+  <div class="col s8 offset-s4" style="margin-top: 0.5cm;">
+
+    <input class="btn red accent-1 waves-effect waves-light" type="submit" value="verify" />
+  </div>
+</form>
+</div>
+  </div>
+</template>

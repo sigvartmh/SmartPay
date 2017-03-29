@@ -6,6 +6,58 @@ Business = new Mongo.Collection('business_accounts');
 Transactions = new Mongo.Collection('transactions');
 Customers = new Mongo.Collection('customers');
 Inbox = new Mongo.Collection('recived_sms')
+Codes = new Mongo.Collection('verification_codes');
+TempUsers = new Mongo.Collection('temporary_userschema');
+
+const ProfileSchema = new SimpleSchema({
+  name:{
+      type: String,
+      label: "Business Name"
+  },
+  mobile_account: {
+    type: Number,
+    label: "Mobile account value"
+  },
+  friends:{
+    type: Array,
+    label: "Friends connected to merchants"
+  },
+  CNIC_number: {
+    type: String,
+    label: "CNIC-number for verifying Pakistani citizenship"
+  }
+})
+
+const TempUserSchema = new SimpleSchema({
+  username: {
+    type: String,
+    unique: true,
+    label: "Phone number of user",
+    regEx: /^[0-9\-\+]{8,15}$/
+  },
+  password: {
+    type: String,
+    label: "Password of user"
+  },
+  profile: {
+    type: ProfileSchema,
+    label: "Schema containing additional information"
+  }
+})
+
+const SMSVerificationSchema = new SimpleSchema({
+  code:{
+    type: Number,
+    label: "Generated Verification number"
+  },
+  phone:{
+    type: String,
+    unique: true,
+    label: "Phone number for verification SMS",
+    regEx: /^[0-9\-\+]{8,15}$/
+  }
+})
+
 
 const MobileWalletSchema = new SimpleSchema({
   provider:{
@@ -126,9 +178,10 @@ const SMSSchema = new SimpleSchema({
 
 Business.attachSchema(BusinessSchema);
 Users.attachSchema(UserSchema);
-Transactions.attachSchema(TransactionSchema);
-Customers.attachSchema(UserSchema);
+//Transactions.attachSchema(TransactionSchema);
 Inbox.attachSchema(SMSSchema);
+TempUsers.attachSchema(TempUserSchema);
+Codes.attachSchema(SMSVerificationSchema);
 
 AccountsTemplates.configure({
   forbidClientAccountCreation:false,
