@@ -6,7 +6,6 @@ import { Picker } from 'meteor/meteorhacks:picker';
 
 console.log(bodyParser);
 Picker.middleware(bodyParser.urlencoded({extended: false}));
-
 Picker.route('/sms/recive/', ({}, request, response) => {
     console.log("test");
     response.statusCode = 200;

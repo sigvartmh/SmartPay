@@ -1,0 +1,18 @@
+<template name="meteor_users">
+  <div class="container">
+  <ul class="collection">
+     {{#each users}}
+       {{> meteor_user}}
+     {{/each}}
+   </ul>
+ </div>
+</template>
+
+<template name="meteor_user">
+  <li class="collection-item avatar">
+    <i class="material-icons circle">?</i>
+    <span class="title">{{username}}</span>
+    <p>{{profile.name}}<br />
+    account: {{profile.mobile_account}}</p>
+  </li>
+</template>

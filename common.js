@@ -129,3 +129,7 @@ Users.attachSchema(UserSchema);
 Transactions.attachSchema(TransactionSchema);
 Customers.attachSchema(UserSchema);
 Inbox.attachSchema(SMSSchema);
+
+AccountsTemplates.configure({
+  forbidClientAccountCreation:false,
+});
