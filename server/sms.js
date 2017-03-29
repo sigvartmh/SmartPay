@@ -10,7 +10,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     console.log("test");
     response.statusCode = 200;
     response.end();
-    console.log(request);
+    console.log("recived sms", request);
     console.log(request.method);
     console.log(request.body);
     console.log(request.body.Body);
