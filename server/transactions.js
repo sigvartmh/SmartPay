@@ -27,19 +27,17 @@ function verifyTransaction(phone_number, business_name, transaction){
   phone_number = '+47' + phone_number;
   let msg = business_name + " has requested "+ transaction.amount + "₹ from you";
   msg += " answer yes/no to approve or decline this request";
-
   client.messages.create({
       body: msg,
       to: phone_number,
       from: twilio_number
-  },(err, msg) => {
+  },Meteor.bindEnvironment((err, msg) => {
       if(err){
         console.log(err);
       }else{
         console.log("twillio msg: ", msg);
         transaction['sid'] = msg.sid;
-        Transactions.insert(transaction);
       }
       console.log(msg.sid);
-  });
+  }));
 }
