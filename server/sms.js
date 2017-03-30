@@ -31,10 +31,10 @@ Picker.route('/sms/recive/', ({}, request, response) => {
         console.log(res);
       }
     });
-    let customer = sms.from;
-    customer = customer.replace("+47", "");
-    console.log(customer)
-    activeTransaction = Transactions.findOne({sender: customer});
-    console.log("Active record: ", activeTransaction )
+    let customer_phone = sms.from;
+    customer_phone = customer_phone.replace("+47", "");
+    const customer = Customers.findOne({phone:customer_phone});
+    activeTransaction = Transactions.findOne({sender: customer._id});
+    console.log("activeTransaction: ", activeTransaction )
 
 });
