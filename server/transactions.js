@@ -37,6 +37,7 @@ function verifyTransaction(phone_number, business_name, transaction){
       }else{
         console.log("twillio msg: ", msg);
         transaction['sid'] = msg.sid;
+        Transactions.insert(transaction);
       }
       console.log(msg.sid);
   }));
