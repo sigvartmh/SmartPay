@@ -168,6 +168,27 @@ const TransactionSchema = new SimpleSchema({
   }
 });
 
+const CustomerSchema = new SimpleSchema({
+  name:{
+      type: String,
+      label: "Business Name"
+  },
+  phone: {
+    type: String,
+    label: "Mobile account value",
+    unique: true
+  },
+  CNIC: {
+    type: String,
+    label: "CNIC-number for verifying Pakistani citizenship",
+    unique: true
+  },
+  verified: {
+    type: Boolean,
+    label: "Verified account by SMS"
+  }
+})
+
 const SMSSchema = new SimpleSchema({
   from:{
     type: String
@@ -183,6 +204,7 @@ Users.attachSchema(UserSchema);
 Inbox.attachSchema(SMSSchema);
 TempUsers.attachSchema(TempUserSchema);
 Codes.attachSchema(SMSVerificationSchema);
+Customers.attachSchema(CustomerSchema);
 
 AccountsTemplates.configure({
   forbidClientAccountCreation:false,
