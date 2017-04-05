@@ -89,7 +89,6 @@ function storeTransaction(customer_phone, response){
       });
 
       response.statusCode = 203; //No Content
-      response.write();
       response.end();
 
       TransactionHistory.insert(activeTransaction);
