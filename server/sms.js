@@ -8,8 +8,6 @@ console.log(bodyParser);
 Picker.middleware(bodyParser.urlencoded({extended: false}));
 Picker.route('/sms/recive/', ({}, request, response) => {
     //console.log("test");
-    response.statusCode = 200;
-    response.end();
     //console.log("recived sms", request);
     //console.log(request.method);
     console.log("Recived SMS: ", request.body);
@@ -38,15 +36,28 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     if(sms.msg.substr(0, "yes".length).toLowerCase() === "yes"){
       updateTransaction(customer_phone, "accepted");
       storeTransaction(customer_phone);
+      response.statusCode = 203; //No Content
+      response.end();
     }else if(sms.msg.substr(0, "no".length).toLowerCase() === "no"){
       updateTransaction(customer_phone, "declined");
       removeTransaction(customer_phone);
+      response.statusCode = 203; //No Content
+      response.end();
     }else if(sms.msg.substr(0, "register".length).toLowerCase() === "register"){
       parseRegistration(sms.from, sms.msg);
     }else{
-      unknownCommand();
+      unknownCommand(response);
     }
 });
+
+function unknownCommand(response){
+  response.writeHead(200, {'Content-Type': 'text/xml'});
+  response.statusCode = 200;
+  msg = "<\?xml version=\"1.0\" encoding=\"UTF-8\">"
+  msg += "<Response><Message>Unkown command</Message></Response>";
+  response.write(msg);
+  response.end();
+}
 
 function registerUser(customer_phone, sms){
 }

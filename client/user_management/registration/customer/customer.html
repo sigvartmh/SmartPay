@@ -22,10 +22,11 @@
   </ul>
   </div>
 </template>
+
 <template name="customer">
   <li class="collection-item avatar">
     <i class="material-icons circle md-48">face</i>
-    <span class="title">{{name}}</span>
+    <span class="title">{{first_name}} {{last_name}}</span>
     <p>{{phone}}</p>
   </li>
 </template>
@@ -37,8 +38,12 @@
     <div class="row" style="margin-top: 0.5cm;">
       <form class="register">
         <div class="input-field col s6 offset-s3">
-            <input id="customer_name" type="text" class="validate">
-            <label for="customer_name">Name</label>
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">First name</label>
+        </div>
+        <div class="input-field col s6 offset-s3">
+            <input id="last_name" type="text" class="validate">
+            <label for="last_name">Last name</label>
         </div>
         <div class="input-field col s6 offset-s3">
                   <input id="phone_number" type="text" class="validate">
