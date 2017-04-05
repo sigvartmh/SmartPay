@@ -25,8 +25,8 @@ Template.waitingForPayment.helpers({
     if(transaction.status === "accepted"){
       FlowRouter.goFlowRouter.go('/payment/success/'+customer.phone+"?amount="+transaction.amount);
     }else if(transaction.status === "declined"){
-      //call update
-    }else{ return}*/
+      console.log("Declined")
+    }//else{ return}*/
     return transaction;
   }
 })
