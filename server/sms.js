@@ -129,8 +129,12 @@ function updateTransaction(customer_phone, status, response){
 
       response.write(msg);
       response.end();
+      Transactions.update({_id: activeTransaction._id},
+        {$set:
+          {status: "declined"}
+        });
+      removeTransaction(customer_phone)
       return false
-
     }else if(activeTransaction){
       Transactions.update({_id: activeTransaction._id},
         {$set:

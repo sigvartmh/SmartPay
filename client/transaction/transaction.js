@@ -29,7 +29,7 @@ Template.waitingForPayment.helpers({
     if(transaction.status === "accepted"){
       FlowRouter.go('/payment/success/'+customer.phone+"?amount="+transaction.amount);
     }else if(transaction.status === "declined"){
-      console.log("Declined")
+      FlowRouter.go('/payment/failure/'+customer.phone+"?amount="+transaction.amount);
     }
     return transaction;
   }
