@@ -69,8 +69,35 @@ function storeTransaction(customer_phone){
     const customer = Customers.findOne({phone: phone});
     activeTransaction = Transactions.findOne({sender: customer._id});
     console.log("activeTransactionFound to be stored: ", activeTransaction );
-    if(activeTransaction){
+
+    if(activeTransaction
+      && customer.mobile_account > activeTransaction.amount
+      && ((customer.mobile_account - activeTransaction.amount) >= 0)
+      ){
+
+      Customers.update({ _id: activeTransaction.sender},{
+        $set: { mobile_account: customer.mobile_account - activeTransaction.amount}
+      });
+
+      Meteor.users.update({_id: activeTransaction.reciver},{
+        $inc:{ "profile.mobile_account":  activeTransaction.amount }
+      });
+
       TransactionHistory.insert(activeTransaction);
+      Transactions.remove({_id: activeTransaction._id});
+
+      response.statusCode = 203; //No Content
+      response.end();
+    }else{
+      response.writeHead(200, {'Content-Type': 'text/xml'});
+
+      msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+      msg += 'Insuficient funds on your account\n'
+      msg += 'Your current balance: '+ customer.mobile_account
+      msg += '</Message></Response>'
+
+      response.write(msg);
+      response.end();
       Transactions.remove({_id: activeTransaction._id});
     }
     activeTransaction = Transactions.findOne({sender: customer._id});
@@ -101,8 +128,6 @@ function updateTransaction(customer_phone, status, response){
         {$set:
           {status: status}
         });
-      response.statusCode = 203; //No Content
-      response.end();
       return true
     }else{
       response.writeHead(200, {'Content-Type': 'text/xml'});
