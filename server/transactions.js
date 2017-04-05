@@ -24,14 +24,14 @@ Meteor.methods({
 })
 function verifyTransaction(phone_number, business_name, transaction){
 
-  phone_number = '+47' + phone_number;
+  const phone = '+47' + phone_number;
   let msg = business_name + " has requested "+ transaction.amount + "₹ from you";
   msg += " answer yes/no to approve or decline this request";
   client.messages.create({
       body: msg,
-      to: phone_number,
+      to: phone,
       from: twilio_number
-  },Meteor.bindEnvironment((err, msg) => {
+  }, Meteor.bindEnvironment((err, msg) => {
       if(err){
         console.log(err);
       }else{

@@ -37,6 +37,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     if(sms.msg.substr(0, "yes".length) === "yes"){
       let customer_phone = sms.from;
       updateTransaction(customer_phone, "accepted")
+      //storeTransaction(customer_phone)
     }else if(sms.msg.substr(0, "no".length) === "no"){
       updateTransaction(customer_phone, "declined")
     }else if(sms.msg.substr(0, "register".length) === "register"){
