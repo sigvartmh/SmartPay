@@ -178,6 +178,10 @@ const TransactionSchema = new SimpleSchema({
   date:{
     type: Date,
     label: "Date when the transaction was requested"
+  },
+  status:{
+    type: String,
+    label: "Transaction status",
   }
 });
 
