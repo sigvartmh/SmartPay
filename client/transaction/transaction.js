@@ -27,11 +27,10 @@ Template.waitingForPayment.helpers({
     //Probably make a struct of status
     /*
     if(transaction.status === "accepted"){
-      //call update
       FlowRouter.goFlowRouter.go('/payment/success/'+customer.phone+"?amount="+transaction.amount);
     }else if(transaction.status === "declined"){
-      //call update
-    }else{ return}*/
+      console.log("Declined")
+    }//else{ return}*/
     return transaction;
   }
 })
