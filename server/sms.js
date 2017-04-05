@@ -34,7 +34,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     //Reception logic
     const customer_phone = sms.from;
     if(sms.msg.substr(0, "yes".length).toLowerCase() === "yes"){
-      updated = updateTransaction(customer_phone, "accepted", response);
+      updated = updateTransaction(customer_phone, "complete", response);
       if(updated){
         storeTransaction(customer_phone, response);
       }
@@ -82,6 +82,11 @@ function storeTransaction(customer_phone, response){
       Meteor.users.update({_id: activeTransaction.reciver},{
         $inc:{ "profile.mobile_account":  activeTransaction.amount }
       });
+
+      Transactions.update({_id: activeTransaction._id},
+        {$set:
+          {status: "accepted"}
+        });
 
       TransactionHistory.insert(activeTransaction);
       Transactions.remove({_id: activeTransaction._id});
