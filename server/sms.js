@@ -53,9 +53,9 @@ Picker.route('/sms/recive/', ({}, request, response) => {
 function unknownCommand(response){
   response.writeHead(200, {'Content-Type': 'text/xml'});
   msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
-  msg += 'Unkown Comman\n please try with yes/no '
+  msg += 'Unkown Command:\nPlease try with yes/no '
   msg += 'or if you are registrating as a new user '
-  msg += 'follow the format:\n register &lt;first name&gt; &lt;last name&gt; &lt;CNIC&gt;'
+  msg += 'follow the format: register &lt;first name&gt; &lt;last name&gt; &lt;CNIC&gt;'
   msg += '</Message></Response>'
   response.write(msg);
   response.end();
