@@ -22,6 +22,14 @@ Template.waitingForPayment.helpers({
     const transaction = Transactions.findOne({
       sender: customer._id
     })
+    //Probably make a struct of status
+    /*
+    if(transaction.status === "accepted"){
+      //call update
+      FlowRouter.goFlowRouter.go('/payment/success/'+customer.phone+"?amount="+transaction.amount);
+    }else if(transaction.status === "declined"){
+      //call update
+    }else{ return}*/
     return transaction;
   }
 })

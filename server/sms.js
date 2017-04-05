@@ -34,8 +34,8 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     });
 
     //Reception logic
+    const customer_phone = sms.from;
     if(sms.msg.substr(0, "yes".length).toLowerCase() === "yes"){
-      let customer_phone = sms.from;
       updateTransaction(customer_phone, "accepted")
       //storeTransaction(customer_phone)
     }else if(sms.msg.substr(0, "no".length).toLowerCase() === "no"){
