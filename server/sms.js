@@ -39,7 +39,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
         storeTransaction(customer_phone, response);
       }
     }else if(sms.msg.substr(0, "no".length).toLowerCase() === "no"){
-      updateTransaction(customer_phone, "declined", response);
+      updated = updateTransaction(customer_phone, "declined", response);
       if(updated){
         removeTransaction(customer_phone);
       }
