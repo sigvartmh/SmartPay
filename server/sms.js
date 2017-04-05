@@ -39,7 +39,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
       updateTransaction(customer_phone, "accepted");
       storeTransaction(customer_phone);
     }else if(sms.msg.substr(0, "no".length).toLowerCase() === "no"){
-      updateTransaction(customer_phone, "declined")
+      updateTransaction(customer_phone, "declined");
       removeTransaction(customer_phone);
     }else if(sms.msg.substr(0, "register".length).toLowerCase() === "register"){
       parseRegistration(sms.from, sms.msg);
@@ -68,7 +68,9 @@ function removeTransaction(customer_phone){
   const phone = customer_phone.replace("+47", "");
   const customer = Customers.findOne({phone: phone});
   activeTransaction = Transactions.findOne({sender: customer._id});
-  Transactions.remove({_id: activeTransaction._id});
+  if(activeTransaction){
+    Transactions.remove({_id: activeTransaction._id});
+  }
   activeTransaction = Transactions.findOne({sender: customer._id});
   console.log("Is Transaction Removed: ", activeTransaction );
 }
