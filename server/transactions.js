@@ -25,8 +25,8 @@ Meteor.methods({
 function verifyTransaction(phone_number, business_name, transaction){
 
   const phone = '+47' + phone_number;
-  let msg = business_name + " has requested "+ transaction.amount + "₹ from you";
-  msg += " answer yes/no to approve or decline this request";
+  let msg = business_name + " has requested "+ transaction.amount + "₹ from you.\n";
+  msg += "Answer yes/no to approve or decline this request";
   client.messages.create({
       body: msg,
       to: phone,

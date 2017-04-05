@@ -34,7 +34,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     //Reception logic
     const customer_phone = sms.from;
     if(sms.msg.substr(0, "yes".length).toLowerCase() === "yes"){
-      updated = updateTransaction(customer_phone, "complete", response);
+      updated = updateTransaction(customer_phone, "accepted", response);
       if(updated){
         storeTransaction(customer_phone, response);
       }
@@ -83,29 +83,12 @@ function storeTransaction(customer_phone, response){
         $inc:{ "profile.mobile_account":  activeTransaction.amount }
       });
 
-      Transactions.update({_id: activeTransaction._id},
-      { $set:
-          { status: "accepted" }
-      });
-
-      response.statusCode = 203; //No Content
-      response.end();
-
       TransactionHistory.insert(activeTransaction);
       Transactions.remove({_id: activeTransaction._id});
 
-
-    }else{
-      response.writeHead(200, {'Content-Type': 'text/xml'});
-
-      msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
-      msg += 'Insuficient funds on your account\n'
-      msg += 'Your current balance: '+ customer.mobile_account
-      msg += '</Message></Response>'
-
-      response.write(msg);
+      response.statusCode = 204; //No Content
       response.end();
-      Transactions.remove({_id: activeTransaction._id});
+
     }
     activeTransaction = Transactions.findOne({sender: customer._id});
     console.log("Is Transaction Removed: ", activeTransaction );
@@ -118,6 +101,8 @@ function removeTransaction(customer_phone){
 
   if(activeTransaction){
     Transactions.remove({_id: activeTransaction._id});
+    response.statusCode = 204; //No Content
+    response.end();
   }
 
   activeTransaction = Transactions.findOne({sender: customer._id});
@@ -128,9 +113,25 @@ function removeTransaction(customer_phone){
 function updateTransaction(customer_phone, status, response){
     const phone = customer_phone.replace("+47", "");
     const customer = Customers.findOne({phone: phone});
+
     activeTransaction = Transactions.findOne({sender: customer._id});
+
     console.log("activeTransaction: ", activeTransaction );
-    if(activeTransaction){
+
+    if(activeTransaction && (status === "accepted")
+    && !(customer.mobile_account >= activeTransaction.amount) ){
+      response.writeHead(200, {'Content-Type': 'text/xml'});
+
+      msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+      msg += 'Insufficient funds on your account\n'
+      msg += 'Your current balance: '+ customer.mobile_account
+      msg += '</Message></Response>'
+
+      response.write(msg);
+      response.end();
+      return false
+
+    }else if(activeTransaction){
       Transactions.update({_id: activeTransaction._id},
         {$set:
           {status: status}
