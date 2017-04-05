@@ -83,16 +83,19 @@ function storeTransaction(customer_phone, response){
         $inc:{ "profile.mobile_account":  activeTransaction.amount }
       });
 
+      response.statusCode = 203; //No Content
+      response.write();
+      response.end();
+
       Transactions.update({_id: activeTransaction._id},
-        {$set:
-          {status: "accepted"}
+      { $set:
+          { status: "accepted" }
       });
 
       TransactionHistory.insert(activeTransaction);
       Transactions.remove({_id: activeTransaction._id});
 
-      response.statusCode = 203; //No Content
-      response.end();
+
     }else{
       response.writeHead(200, {'Content-Type': 'text/xml'});
 
