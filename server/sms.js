@@ -36,7 +36,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     if(sms.msg.substr(0, "yes".length).toLowerCase() === "yes"){
       updated = updateTransaction(customer_phone, "accepted", response);
       if(updated){
-        storeTransaction(customer_phone);
+        storeTransaction(customer_phone, response);
       }
     }else if(sms.msg.substr(0, "no".length).toLowerCase() === "no"){
       updateTransaction(customer_phone, "declined", response);
@@ -64,7 +64,7 @@ function unknownCommand(response){
 function registerUser(customer_phone, sms){
 }
 
-function storeTransaction(customer_phone){
+function storeTransaction(customer_phone, response){
     const phone = customer_phone.replace("+47", "");
     const customer = Customers.findOne({phone: phone});
     activeTransaction = Transactions.findOne({sender: customer._id});
