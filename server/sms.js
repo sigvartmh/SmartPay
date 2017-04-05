@@ -22,6 +22,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
       from: request.body.From
     };
 
+    //Used for debugging
     Inbox.insert(sms,(err, res)=>{
       console.log(err);
       if(err){
@@ -31,10 +32,35 @@ Picker.route('/sms/recive/', ({}, request, response) => {
         console.log(res);
       }
     });
-    let customer_phone = sms.from;
-    customer_phone = customer_phone.replace("+47", "");
+
+    //Reception logic
+    if(sms.msg.substr(0, "yes".length) === "yes"){
+      let customer_phone = sms.from;
+      updateTransaction(customer_phone, "accepted")
+    }else if(sms.msg.substr(0, "no".length) === "no"){
+      updateTransaction(customer_phone, "declined")
+    }else if(sms.msg.substr(0, "register".length) === "register"){
+      parseRegistration(sms.from, sms.msg);
+    }else{
+      unknownCommand();
+    }
+});
+
+function registerUser(customer_phone, sms){
+}
+
+function updateTransaction(customer_phone, status){
+    const phone = customer_phone.replace("+47", "");
     const customer = Customers.findOne({phone:customer_phone});
     activeTransaction = Transactions.findOne({sender: customer._id});
-    console.log("activeTransaction: ", activeTransaction )
-
-});
+    console.log("activeTransaction: ", activeTransaction );
+    if(activeTransaction){
+      Transactions.update({_id: activeTransaction._id},
+        {$set:
+          {status: status}
+        });
+    }
+    //update client
+    activeTransaction = Transactions.findOne({sender: customer._id});
+    console.log("activeTransaction: ", activeTransaction );
+}
