@@ -34,13 +34,13 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     });
 
     //Reception logic
-    if(sms.msg.substr(0, "yes".length) === "yes"){
+    if(sms.msg.substr(0, "yes".length).toLowerCase() === "yes"){
       let customer_phone = sms.from;
       updateTransaction(customer_phone, "accepted")
       //storeTransaction(customer_phone)
-    }else if(sms.msg.substr(0, "no".length) === "no"){
+    }else if(sms.msg.substr(0, "no".length).toLowerCase() === "no"){
       updateTransaction(customer_phone, "declined")
-    }else if(sms.msg.substr(0, "register".length) === "register"){
+    }else if(sms.msg.substr(0, "register".length).toLowerCase() === "register"){
       parseRegistration(sms.from, sms.msg);
     }else{
       unknownCommand();
@@ -52,7 +52,7 @@ function registerUser(customer_phone, sms){
 
 function updateTransaction(customer_phone, status){
     const phone = customer_phone.replace("+47", "");
-    const customer = Customers.findOne({phone:customer_phone});
+    const customer = Customers.findOne({phone: phone});
     activeTransaction = Transactions.findOne({sender: customer._id});
     console.log("activeTransaction: ", activeTransaction );
     if(activeTransaction){
