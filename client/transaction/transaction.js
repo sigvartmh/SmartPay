@@ -7,6 +7,7 @@ Template.requestPayment.helpers({
     return customer;
   },
 })
+
 Template.waitingForPayment.helpers({
   customer() {
     const customer = Customers.findOne({
@@ -55,6 +56,7 @@ Template.requestPayment.events({
         console.log(err);
       }else{
         console.log(res);
+        FlowRouter.go('/merchants/waitingForPayment/'+customer.phone)
       }
     });
     console.log(transaction);
