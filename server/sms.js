@@ -71,7 +71,7 @@ function storeTransaction(customer_phone, response){
     console.log("activeTransactionFound to be stored: ", activeTransaction );
 
     if(activeTransaction
-      && customer.mobile_account > activeTransaction.amount
+      && customer.mobile_account >= activeTransaction.amount
       && ((customer.mobile_account - activeTransaction.amount) >= 0)
       ){
 
