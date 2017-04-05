@@ -19,13 +19,14 @@ Meteor.methods({
         throw Meteor.error("merchant.notAuthorized", "You are not logged inn");
       }
       console.log(merchant);
-      //if(Meteor.)
+      
       const customer = {
         name: name,
         phone: phone_number,
         CNIC: cnic_number,
         verified: false
       }
+      console.log(customer);
 
       customerID = Customers.insert(customer);
       console.log(customerID);
