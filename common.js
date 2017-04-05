@@ -159,12 +159,25 @@ const PakistanAddressSchema = new SimpleSchema({
 const TransactionSchema = new SimpleSchema({
   amount:{
     type: Number,
+    label: "Requested amount of payment"
   },
-  seller:{
-    type: BusinessSchema,
+  reciver:{
+    type: String,
+    label: "Merchant",
+    unique: true
   },
-  buyer:{
-    type: UserSchema,
+  sender:{
+    type: String,
+    label: "Customer"
+  },
+  sid:{
+    type: String,
+    label: "SID from Twilio for debugging",
+    optional: true
+  },
+  date:{
+    type: Date,
+    label: "Date when the transaction was requested"
   }
 });
 
@@ -208,7 +221,7 @@ const SMSSchema = new SimpleSchema({
 
 Business.attachSchema(BusinessSchema);
 Users.attachSchema(UserSchema);
-//Transactions.attachSchema(TransactionSchema);
+Transactions.attachSchema(TransactionSchema);
 Inbox.attachSchema(SMSSchema);
 TempUsers.attachSchema(TempUserSchema);
 Codes.attachSchema(SMSVerificationSchema);
