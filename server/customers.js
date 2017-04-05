@@ -20,7 +20,7 @@ Meteor.methods({
         throw Meteor.error("merchant.notAuthorized", "You are not logged inn");
       }
       console.log(merchant);
-      
+
       const customer = {
         first_name: first_name,
         last_name: last_name,

@@ -55,7 +55,7 @@ function unknownCommand(response){
   msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
   msg += 'Unkown Comman\n please try with yes/no '
   msg += 'or if you are registrating as a new user '
-  msg += 'follow the format:\n register &l;tfirst name&gt; &lt;last name&gt &lt;CNIC&gt;'
+  msg += 'follow the format:\n register &lt;first name&gt; &lt;last name&gt; &lt;CNIC&gt;'
   msg += '</Message></Response>'
   response.write(msg);
   response.end();
