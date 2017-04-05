@@ -19,9 +19,11 @@ Template.waitingForPayment.helpers({
     const customer = Customers.findOne({
       phone: FlowRouter.current().params.customer
     })
+    console.log("transaction: ", customer)
     const transaction = Transactions.findOne({
       sender: customer._id
     })
+    console.log(transaction)
     return transaction;
   }
 })
