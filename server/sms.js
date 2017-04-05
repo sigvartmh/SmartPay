@@ -34,15 +34,15 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     //Reception logic
     const customer_phone = sms.from;
     if(sms.msg.substr(0, "yes".length).toLowerCase() === "yes"){
-      updateTransaction(customer_phone, "accepted");
-      storeTransaction(customer_phone);
-      response.statusCode = 203; //No Content
-      response.end();
+      updated = updateTransaction(customer_phone, "accepted", response);
+      if(updated){
+        storeTransaction(customer_phone);
+      }
     }else if(sms.msg.substr(0, "no".length).toLowerCase() === "no"){
-      updateTransaction(customer_phone, "declined");
-      removeTransaction(customer_phone);
-      response.statusCode = 203; //No Content
-      response.end();
+      updateTransaction(customer_phone, "declined", response);
+      if(updated){
+        removeTransaction(customer_phone);
+      }
     }else if(sms.msg.substr(0, "register".length).toLowerCase() === "register"){
       parseRegistration(sms.from, sms.msg);
     }else{
@@ -81,15 +81,17 @@ function removeTransaction(customer_phone){
   const phone = customer_phone.replace("+47", "");
   const customer = Customers.findOne({phone: phone});
   activeTransaction = Transactions.findOne({sender: customer._id});
+
   if(activeTransaction){
     Transactions.remove({_id: activeTransaction._id});
   }
+
   activeTransaction = Transactions.findOne({sender: customer._id});
   console.log("Is Transaction Removed: ", activeTransaction );
 }
 
 
-function updateTransaction(customer_phone, status){
+function updateTransaction(customer_phone, status, response){
     const phone = customer_phone.replace("+47", "");
     const customer = Customers.findOne({phone: phone});
     activeTransaction = Transactions.findOne({sender: customer._id});
@@ -99,6 +101,17 @@ function updateTransaction(customer_phone, status){
         {$set:
           {status: status}
         });
+      response.statusCode = 203; //No Content
+      response.end();
+      return true
+    }else{
+      response.writeHead(200, {'Content-Type': 'text/xml'});
+      msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+      msg += 'No active sale is found connected to your phone number'
+      msg += '</Message></Response>'
+      response.write(msg);
+      response.end();
+      return false
     }
     //update client
     activeTransaction = Transactions.findOne({sender: customer._id});
