@@ -36,10 +36,11 @@ Picker.route('/sms/recive/', ({}, request, response) => {
     //Reception logic
     const customer_phone = sms.from;
     if(sms.msg.substr(0, "yes".length).toLowerCase() === "yes"){
-      updateTransaction(customer_phone, "accepted")
-      //storeTransaction(customer_phone)
+      updateTransaction(customer_phone, "accepted");
+      storeTransaction(customer_phone);
     }else if(sms.msg.substr(0, "no".length).toLowerCase() === "no"){
       updateTransaction(customer_phone, "declined")
+      removeTransaction(customer_phone);
     }else if(sms.msg.substr(0, "register".length).toLowerCase() === "register"){
       parseRegistration(sms.from, sms.msg);
     }else{
@@ -49,6 +50,29 @@ Picker.route('/sms/recive/', ({}, request, response) => {
 
 function registerUser(customer_phone, sms){
 }
+
+function storeTransaction(customer_phone){
+    const phone = customer_phone.replace("+47", "");
+    const customer = Customers.findOne({phone: phone});
+    activeTransaction = Transactions.findOne({sender: customer._id});
+    console.log("activeTransactionFound to be stored: ", activeTransaction );
+    if(activeTransaction){
+      TransactionHistory.insert(activeTransaction);
+      Transactions.remove({_id: activeTransaction._id});
+    }
+    activeTransaction = Transactions.findOne({sender: customer._id});
+    console.log("Is Transaction Removed: ", activeTransaction );
+}
+
+function removeTransaction(customer_phone){
+  const phone = customer_phone.replace("+47", "");
+  const customer = Customers.findOne({phone: phone});
+  activeTransaction = Transactions.findOne({sender: customer._id});
+  Transactions.remove({_id: activeTransaction._id});
+  activeTransaction = Transactions.findOne({sender: customer._id});
+  console.log("Is Transaction Removed: ", activeTransaction );
+}
+
 
 function updateTransaction(customer_phone, status){
     const phone = customer_phone.replace("+47", "");
