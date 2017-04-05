@@ -29,6 +29,17 @@
 </template>
 
 <template name="waitingForPayment">
+  <div class="container">
+    <div class="row">
+    <center>
+    <div class="col s12" style="margin-top: 0.5cm;">
+      Waiting for payment from: {{ customer.name }}
+      <div class="loader"></div>
+      status: {{transaction.status}}
+    </div>
+    </center>
+    </div>
+  </div>
 </template>
 
 <template name="success">
@@ -47,7 +58,7 @@
           </svg></a>
 
 <p>Payment recived</p>
-<h4>from: {{number}}</h4>
-<h4>amount: {{amount}}</h4>
+<h4>from: {{ phone }}</h4>
+<h4>amount: {{ amount }}</h4>
 </div>
 </template>

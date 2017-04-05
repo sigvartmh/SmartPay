@@ -7,6 +7,24 @@ Template.requestPayment.helpers({
     return customer;
   },
 })
+Template.waitingForPayment.helpers({
+  customer() {
+    const customer = Customers.findOne({
+      phone: FlowRouter.current().params.customer
+    })
+    console.log(customer);
+    return customer;
+  },
+  transaction(){
+    const customer = Customers.findOne({
+      phone: FlowRouter.current().params.customer
+    })
+    const transaction = Transactions.findOne({
+      sender: customer._id
+    })
+    return transaction;
+  }
+})
 
 Template.requestPayment.events({
   'submit .transaction'(event){
