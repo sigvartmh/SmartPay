@@ -10,8 +10,9 @@ const twilio_number = process.env.TWILIO_NUMBER;
 const client = new twilio.RestClient(twilio_sid, twilio_auth);
 
 Meteor.methods({
-  'customer.register'(name, phone_number, cnic_number){
-      check(name, String);
+  'customer.register'(first_name,last_name, phone_number, cnic_number){
+      check(first_name, String);
+      check(last_name, String);
       check(phone_number, String)
       check(cnic_number, String)
       let merchant = Meteor.user()
@@ -21,9 +22,11 @@ Meteor.methods({
       console.log(merchant);
       
       const customer = {
-        name: name,
+        first_name: first_name,
+        last_name: last_name,
         phone: phone_number,
         CNIC: cnic_number,
+        mobile_account: 0,
         verified: false
       }
       console.log(customer);

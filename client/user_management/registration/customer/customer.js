@@ -15,16 +15,19 @@ Template.customer_register.helpers({
 Template.customer_register.events({
   'submit .register'(event){
     event.preventDefault();
-    const name = event.target.customer_name.value;
+    const first_name = event.target.first_name.value;
+    const last_name = event.target.last_name.value;
     const phone_number = event.target.phone_number.value;
     const CNIC_number = event.target.cnic_number.value;
 
-    Meteor.call('customer.register', name, phone_number, CNIC_number, (err, res) =>{
+    Meteor.call('customer.register', first_name, last_name, phone_number, CNIC_number, (err, res) =>{
       if(err){
         console.log(err)
+        Materialize.toast(err.reason, 4000)
       }else{
         console.log(res)
-        event.target.customer_name.value = ''
+        event.target.first_name.value = ''
+        event.target.last_name.value = ''
         event.target.phone_number.value = ''
         event.target.cnic_number.value = ''
         FlowRouter.go('/customers/register/verification'+"?phone="+phone_number);

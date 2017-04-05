@@ -62,8 +62,9 @@
 <template name="friend">
   <li class="collection-item avatar">
     <i class="material-icons circle">face</i>
-    <span class="title">{{ name }}</span>
-    <p>{{ phone }}<br />
-    {{ CNIC }}</p>
+    <span class="title">{{first_name}} {{last_name}}</span>
+    <p>Phone: {{ phone }}<br />
+    CNIC: {{ CNIC }} <br />
+    Account balance: {{mobile_account}}</p>
   </li>
 </template>

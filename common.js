@@ -17,7 +17,7 @@ const ProfileSchema = new SimpleSchema({
   },
   mobile_account: {
     type: Number,
-    label: "Mobile account value"
+    label: "Mobile account balance"
   },
   friends:{
     type: Array,
@@ -169,19 +169,27 @@ const TransactionSchema = new SimpleSchema({
 });
 
 const CustomerSchema = new SimpleSchema({
-  name:{
+  first_name:{
       type: String,
-      label: "Business Name"
+      label: "First Name"
+  },
+  last_name:{
+    type: String,
+    label: "Last Name"
   },
   phone: {
     type: String,
-    label: "Mobile account value",
+    label: "Mobile phone number of customer",
     unique: true
   },
   CNIC: {
     type: String,
     label: "CNIC-number for verifying Pakistani citizenship",
     unique: true
+  },
+  mobile_account: {
+    type: Number,
+    label: "Mobile account balance"
   },
   verified: {
     type: Boolean,
