@@ -52,8 +52,7 @@ Picker.route('/sms/recive/', ({}, request, response) => {
 
 function unknownCommand(response){
   response.writeHead(200, {'Content-Type': 'text/xml'});
-  msg = "<\?xml version=\"1.0\" encoding=\"UTF-8\">"
-  msg += "<Response><Message>Unkown command</Message></Response>";
+  msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>This is message 1 of 2.</Message> <Message>This is message 2 of 2.</Message></Response>'
   response.write(msg);
   response.end();
 }
