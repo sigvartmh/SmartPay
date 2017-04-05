@@ -86,7 +86,7 @@ function storeTransaction(customer_phone, response){
       Transactions.update({_id: activeTransaction._id},
         {$set:
           {status: "accepted"}
-        });
+      });
 
       TransactionHistory.insert(activeTransaction);
       Transactions.remove({_id: activeTransaction._id});
