@@ -33,7 +33,7 @@ Template.sale.helpers({
     let recive = Meteor.users.findOne({"_id": this.reciver })
     console.log("reciver:",recive)
     if(recive){
-      console.log(reciver.username)
+      console.log(recive.username)
       return recive.username
     }else{
       recive = Customers.findOne({"_id":this.reciver})
