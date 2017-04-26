@@ -24,5 +24,7 @@ App.launchScreens({
   // More screen sizes and platforms...
 });
 App.accessRule('https://me.sigvarth.org:8003');
+App.accessRule('https://me.sigvarth.org:8003/*');
+
 
 App.setPreference('BackgroundColor', '0xffffffff');
