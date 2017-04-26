@@ -185,7 +185,6 @@ function storeTransaction(customer_phone, response){
       });
 
       TransactionHistory.insert(activeTransaction);
-      Transactions.remove({_id: activeTransaction._id});
 
       response.statusCode = 204; //No Content
       response.end();
