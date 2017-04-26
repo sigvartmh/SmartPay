@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-
+import { check, Match } from 'meteor/check';
 import bodyParser from 'body-parser';
 import { Picker } from 'meteor/meteorhacks:picker';
 
