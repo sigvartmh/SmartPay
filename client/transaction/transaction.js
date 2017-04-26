@@ -40,18 +40,18 @@ Template.sale.helpers({
       console.log("Helper return reciver", recive)
       if(recive) return recive.phone;
     }
-    console.log("helper:", reciver)
+    console.log("helper:", recive)
   },
   sender_phone(){
     let send = Meteor.users.findOne({"_id": this.sender})
-    console.log("reciver:", send)
+    console.log("Sender:", send)
     if(send){
       console.log(send.username)
       return send.username
     }else{
       send = Customers.findOne({"_id": this.sender})
-      console.log("Helper return reciver", send)
-      if(reciver) return send.phone;
+      console.log("Helper return sender", send)
+      if(send) return send.phone;
     }
     console.log("helper:", send)
   }

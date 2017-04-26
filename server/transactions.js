@@ -19,9 +19,10 @@ Meteor.methods({
     merchant = Meteor.user();
     console.log("server: ", customer);
     console.log("server: ", merchant)
-    verifyTransaction(customer.phone, merchant.profile.name, transaction);
+    verifyTransaction(customer.phone, merchant.profile.business_name, transaction);
   }
 })
+
 function verifyTransaction(phone_number, business_name, transaction){
 
   const phone = '+47' + phone_number;
