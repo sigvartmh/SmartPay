@@ -3,6 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { check, Match } from 'meteor/check';
 import bodyParser from 'body-parser';
 import { Picker } from 'meteor/meteorhacks:picker';
+import { CustomerSchema } from '../common.js';
 
 console.log(bodyParser);
 Picker.middleware(bodyParser.urlencoded({extended: false}));
