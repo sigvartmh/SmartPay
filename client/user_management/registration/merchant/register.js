@@ -48,7 +48,7 @@ Template.merchant_sms_verification.events({
         Materialize.toast(err.reason, 4000)
       }else{
         event.target.sms_code.value = '';
-        FlowRouter.go('/login'); // Go to success
+        FlowRouter.go('/merchants/register/success'); // Go to success
       }
     });
   }

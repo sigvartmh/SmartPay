@@ -28,7 +28,12 @@
   -webkit-font-smoothing: antialiased;
 }
 
+circle.path{
+  stroke: white;
+}
+
 .path {
+  stroke: white;
   stroke-dasharray: 1000;
   stroke-dashoffset: 0;
   animation: dash 2s ease-in-out;
@@ -36,6 +41,7 @@
 }
 
 .spin {
+  stroke: yellow;
   animation: spin 2s;
   -webkit-animation: spin 2s;
   transform-origin: 50% 50%;
