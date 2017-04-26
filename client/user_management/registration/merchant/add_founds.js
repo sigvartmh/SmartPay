@@ -2,6 +2,9 @@ Template.add_founds.events({
   'submit .founds'(event){
     event.preventDefault();
     const amount = Number(event.target.amount.value)
+    const phone_number = event.target.phone_number.value;
+    const user = Meteor.users.findOne({username: phone_number});
+    console.log("user:",user);
     console.log("submit clicked", amount);
     Meteor.users.update(Meteor.user()._id, {$inc: {"profile.mobile_account": amount}})
   }

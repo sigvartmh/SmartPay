@@ -1,0 +1,104 @@
+<template name="merchants_register">
+  <div class="container">
+    <center><h4>Register your business</h4></center>
+    <div class="row" style="margin-top: 0.5cm;">
+      <form class="register">
+        <div class="input-field col s6">
+          <input placeholder="" id="first_name" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+        <div class="input-field col s12">
+            <input id="business_name" type="text" class="validate">
+            <label for="business_name">Business Name</label>
+          </div>
+        <div class="input-field col s12">
+                  <input id="phone_number" type="text" class="validate">
+                  <label for="phone_number">Phone Number</label>
+        </div>
+      <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+        <div class="input-field col s12">
+            <input id="password_again" type="password" class="validate">
+            <label for="password_again">Password (again)</label>
+          </div>
+        <div class="col s6 offset-s3" style="margin-top: 0.5cm;">
+          <input class="btn white accent-1 waves-effect waves-light" type="submit" value="Register" />
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
+<template name="merchant_sms_verification">
+  <div class="container">
+  <div class="row" style="margin-top: 4.5cm;">
+    <form class="verify">
+  <div class="input-field col s4 offset-s4">
+      <input id="sms_code" type="password" class="validate" style="text-align: center;">
+      <label for="sms_code">SMS-code</label>
+  </div>
+  <div class="col s8 offset-s4" style="margin-top: 0.5cm;">
+
+    <input class="btn white accent-1 waves-effect waves-light" type="submit" value="verify" />
+  </div>
+</form>
+</div>
+  </div>
+</template>
+
+<template name="merchant_friends">
+    <div class="container">
+    <ul class="collection">
+       {{#each friends}}
+         {{> friend}}
+       {{/each}}
+     </ul>
+     <div class="fixed-action-btn">
+   <a href="/merchants/add_customer" class="btn-floating btn-large white">
+     <i class="large material-icons" style="color:black;">person_add</i>
+   </a>
+ </div>
+   </div>
+</template>
+
+<template name="friend">
+  <li class="collection-item avatar" id="friend">
+    <i class="material-icons circle">face</i>
+    <div class="row">
+      <div class="col s6">
+    <span class="title">{{first_name}} {{last_name}}</span>
+    <p>Phone: {{ phone }}<br />
+    CNIC: {{ CNIC }} <br /></p>
+  </div>
+  <div class="col s1 offset-s4">
+    <i class="material-icons small" id="remove" style="color:red;">highlight_remove</i>
+  </div>
+  </div>
+</li>
+</template>
+
+<template name="registration_success">
+  <div class="container">
+  <div class="checkmark">
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 161.2 161.2" enable-background="new 0 0 161.2 161.2" xml:space="preserve">
+<path class="path" fill="none" stroke="#7DB0D5" stroke-miterlimit="10" d="M425.9,52.1L425.9,52.1c-2.2-2.6-6-2.6-8.3-0.1l-42.7,46.2l-14.3-16.4
+	c-2.3-2.7-6.2-2.7-8.6-0.1c-1.9,2.1-2,5.6-0.1,7.7l17.6,20.3c0.2,0.3,0.4,0.6,0.6,0.9c1.8,2,4.4,2.5,6.6,1.4c0.7-0.3,1.4-0.8,2-1.5
+	c0.3-0.3,0.5-0.6,0.7-0.9l46.3-50.1C427.7,57.5,427.7,54.2,425.9,52.1z"/>
+<circle class="path" fill="none" stroke="#7DB0D5" stroke-width="4" stroke-miterlimit="10" cx="80.6" cy="80.6" r="62.1"/>
+<polyline class="path" fill="none" stroke="#7DB0D5" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="113,52.8
+	74.1,108.4 48.2,86.4 "/>
+
+<circle class="spin" fill="none" stroke="#7DB0D5" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12.2175,12.2175" cx="80.6" cy="80.6" r="73.9"/>
+
+          </svg>
+  </div>
+  <h4> Success fully registred for SmartPay </h4>
+</div>
+</template>
