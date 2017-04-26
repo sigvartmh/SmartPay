@@ -22,7 +22,7 @@ Template.history.helpers({
   sales(){
     const merchant = Meteor.user()
     if(merchant !== undefined){
-    const history = TransactionHistory.find({$or: [{"reciver": merchant._id}, {"sender": merchant._id}]}).sort({date: 1});
+    const history = TransactionHistory.find({$or: [{"reciver": merchant._id}, {"sender": merchant._id}]});
     return history;
     }
   }
@@ -86,8 +86,10 @@ Template.waitingForPayment.helpers({
     console.log(transaction)
     //Probably make a struct of status
     if(transaction.status === "accepted"){
+      Transactions.remove({_id: transaction._id});
       FlowRouter.go('/payment/success/'+customer.phone+"?amount="+transaction.amount);
     }else if(transaction.status === "declined"){
+      Transactions.remove({_id: transaction._id});
       FlowRouter.go('/payment/failure/'+customer.phone+"?amount="+transaction.amount);
     }
     return transaction;
