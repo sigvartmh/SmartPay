@@ -3,7 +3,37 @@ import { Accounts } from 'meteor/accounts-base';
 import { check, Match } from 'meteor/check';
 import bodyParser from 'body-parser';
 import { Picker } from 'meteor/meteorhacks:picker';
-import { CustomerSchema } from '../common.js';
+import SimpleSchema from 'simpl-schema';
+//import { CustomerSchema } from '../common.js';
+
+const CustomerSchema = new SimpleSchema({
+  first_name:{
+      type: String,
+      label: "First Name"
+  },
+  last_name:{
+    type: String,
+    label: "Last Name"
+  },
+  phone: {
+    type: String,
+    label: "Mobile phone number of customer",
+    unique: true
+  },
+  CNIC: {
+    type: String,
+    label: "CNIC-number for verifying Pakistani citizenship",
+    unique: true
+  },
+  mobile_account: {
+    type: Number,
+    label: "Mobile account balance"
+  },
+  verified: {
+    type: Boolean,
+    label: "Verified account by SMS"
+  }
+})
 
 console.log(bodyParser);
 Picker.middleware(bodyParser.urlencoded({extended: false}));
@@ -53,27 +83,40 @@ Picker.route('/sms/recive/', ({}, request, response) => {
 
 function parseRegistration(from, msg, response){
 
-  parse = msg.split(' ')
+  parse = msg.split(" ")
   const customer_phone = from.replace("+47", "");
 
   const customer = {
-    first_name : msg[1],
-    last_name : msg[2],
-    CNIC : msg[3],
+    first_name : parse[1],
+    last_name : parse[2],
+    CNIC : parse[3],
     phone : customer_phone,
     verified : true,
     mobile_account : 0
   }
-  const isValid = Match.test(customer, CustomerSchema);
+  const isValid = CustomerSchema.namedContext("myContext").validate(customer);
+  console.log("is valid:", isValid)
+  console.log(customer)
   if(isValid){
-    Customers.Insert(customer)
-    response.writeHead(200, {'Content-Type': 'text/xml'});
-    msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
-    msg += 'Account for phone number: '+customer_phone + '\n'
-    msg += 'was successfuly created.'
-    msg += '</Message></Response>'
-    response.write(msg);
-    response.end();
+    const exsists = Customers.findOne({phone: customer_phone})
+    console.log("exsist": exsists);
+    if(!exsists){
+      Customers.Insert(customer)
+      response.writeHead(200, {'Content-Type': 'text/xml'});
+      msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+      msg += 'Account for phone number: '+customer_phone + '\n'
+      msg += 'was successfuly created.'
+      msg += '</Message></Response>'
+      response.write(msg);
+      response.end();
+    }else{
+      response.writeHead(200, {'Content-Type': 'text/xml'});
+      msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+      msg += 'Account already exsists for phone number: '+customer_phone + '\n'
+      msg += '</Message></Response>'
+      response.write(msg);
+      response.end();
+    }
   }else{
     response.writeHead(200, {'Content-Type': 'text/xml'});
     msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
