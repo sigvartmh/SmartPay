@@ -22,7 +22,7 @@ Template.history.helpers({
   sales(){
     const merchant = Meteor.user()
     if(merchant !== undefined){
-    const history = TransactionHistory.find({$or: [{"reciver": merchant._id}, {"sender": merchant._id}]}).sort({date: 1});
+    const history = TransactionHistory.find({$or: [{"reciver": merchant._id}, {"sender": merchant._id}]});
     return history;
     }
   }
