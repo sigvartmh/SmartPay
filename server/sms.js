@@ -76,10 +76,32 @@ Picker.route('/sms/recive/', ({}, request, response) => {
       }
     }else if(sms.msg.substr(0, "register".length).toLowerCase() === "register"){
       parseRegistration(sms.from, sms.msg, response);
+    }else if(sms.msg.substr(0, "balance".length).toLowerCase() === "balance"){
+      checkBalance(sms.from, response);
     }else{
       unknownCommand(response);
     }
 });
+
+function parseRegistration(from, response){
+  const customer = Customers.findOne({phone: customer_phone})
+  const customer_phone = from.replace("+47", "");
+  if(customer){
+    response.writeHead(200, {'Content-Type': 'text/xml'});
+    msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+    msg += 'Your account balance is:'+ customer.mobile_account + '\n'
+    msg += '</Message></Response>'
+    response.write(msg);
+    response.end();
+  }else{
+    response.writeHead(200, {'Content-Type': 'text/xml'});
+    msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+    msg += 'Account does not exist with phone number:'+ customer_phone + '\n'
+    msg += '</Message></Response>'
+    response.write(msg);
+    response.end();
+  }
+}
 
 function parseRegistration(from, msg, response){
 
