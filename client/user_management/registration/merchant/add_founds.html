@@ -1,0 +1,41 @@
+<template name="add_founds">
+    <div class="container">
+      <div class="row" style="margin-top: 4.5cm;">
+      <form class="founds">
+      <div class="input-field col s4 offset-s4">
+          <input id="amount" type="number" class="validate" style="text-align: center;">
+          <label for="amount">Amount</label>
+      </div>
+      <div class="col s8 offset-s4" style="margin-top: 0.5cm;">
+        <input class="btn white accent-1 waves-effect waves-light" type="submit" value="add" />
+      </div>
+    </form>
+    </div>
+   </div>
+</template>
+
+<template name="transfer_founds">
+  <div class="container">
+    <div class="card white darken-1">
+      <div class="card-content" style="color:black;">
+        {{currentUser.profile.business_name}}<br />
+        Account: {{currentUser.profile.mobile_account}}₹
+      </div>
+    </div>
+    Transfer founds to:
+    <div class="card white darken-1">
+      <div class="card-content" style="color:black;">
+        {{customer.first_name}} {{customer.last_name}}<br />
+        <form class="transfer">
+        <div class="input-field col s4 offset-s4" >
+            <input id="amount" type="number" class="validate" style="text-align: center; color: black; border-bottom: 1px solid black">
+            <label for="amount" style="color: black;">Amount</label>
+        </div>
+        <div class="col s8 offset-s4" style="margin-top: 0.5cm;">
+          <input class="btn white accent-1 waves-effect waves-light" type="submit" value="transfer" />
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</template>

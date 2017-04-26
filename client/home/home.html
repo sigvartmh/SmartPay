@@ -1,0 +1,24 @@
+<template name="home">
+  <div class="container">
+    <div class="row" style="margin-top: 1cm;">
+      <div class="col s12">
+        <center><h4>Hi {{ user.profile.first_name}} !</h4>
+        <h5>Your account: {{ user.profile.mobile_account }}₹</h5></center>
+      </div>
+      <div class="col s12">
+        <center>
+          <a href="/transactions"><i class="large material-icons">payment</i>
+          <h5>Transaction</h5></a>
+        </center>
+      </div>
+    <div class="col s12">
+      <center>
+        <a href="merchants/friends"><i class="large material-icons">group</i>
+        <h5>Friends</h5></a>
+      </center>
+    </div>
+        {{ user.username }}
+
+    </div>
+  </div>
+</template>

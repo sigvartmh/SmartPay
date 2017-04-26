@@ -12,6 +12,30 @@ Template.customer_register.helpers({
   },
 });
 
+Template.add_customer.events({
+  'submit .add'(event){
+    event.preventDefault();
+    const phone_number = event.target.phone_number.value;
+    const customer = Customers.findOne({"phone":phone_number})
+    const merchant = Meteor.user()
+    if(customer){
+      if(customer.verified){
+        Meteor.users.update(merchant._id, {$push: {"profile.friends": customer._id}})
+        FlowRouter.go('/merchants/friends')
+      }else{
+        Materialize.toast("Customer not verified", 4000)
+      }
+      console.log("add and go back")
+    }else{
+      Materialize.toast("Customer not registred, redirecting", 3000)
+      setTimeout(()=>FlowRouter.go('/customers/register'),3000);
+      console.log("redirect to customer registration")
+    }
+    console.log(customer)
+    console.log(phone_number)
+  }
+})
+
 Template.customer_register.events({
   'submit .register'(event){
     event.preventDefault();
@@ -51,7 +75,7 @@ Template.customer_sms_verification.events({
         Materialize.toast(err.reason, 4000)
       }else{
         event.target.sms_code.value = '';
-        FlowRouter.go('/login3');
+        FlowRouter.go('/registration/success/'+phone_number);
       }
     });
   }

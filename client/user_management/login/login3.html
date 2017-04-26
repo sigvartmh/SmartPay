@@ -1,23 +1,24 @@
 <template name="secure_login3">
   <div class="container">
-    <div class="row" style="margin-top: 5cm;">
+    <div class="row" style="margin-top: 3cm;">
       {{ user.username }}
       {{ user.profile.name}}
       {{ user.profile.mobile_account}}
       <form class="login">
       <div class="col s12">
-        <div class="input-field col s6 offset-s3">
-                  <input id="phone_number" type="text" class="validate">
-                  <label for="phone_number">Phone Number</label>
-                </div>      </div>
+      <div class="input-field col s6 offset-s3">
+          <input id="phone_number" type="text" class="validate">
+          <label for="phone_number">Phone Number</label>
+      </div>
       <div class="input-field col s6 offset-s3">
           <input id="password" type="password" class="validate">
           <label for="password">Password</label>
-        </div>
+      </div>
         <div class="col s6 offset-s3" style="margin-top: 0.5cm;">
-          <input class="btn red accent-1 waves-effect waves-light" type="submit" value="Login" />
-          <input class="btn red accent-1 waves-effect waves-light logout" type="button" value="Logout" />
+          <input class="btn white accent-1 waves-effect waves-light" type="submit" value="Login" />
+          <input class="btn white accent-1 waves-effect waves-light logout" type="button" value="Logout" />
         </div>
+      </div>
       </form>
     </div>
   </div>

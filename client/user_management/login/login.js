@@ -14,23 +14,6 @@ Template.secure_login3.helpers({
   },
 });
 
-Template.secure_login.events({
-  'submit .login'(event){
-    event.preventDefault();
-    const target = event.target;
-    const password = target.password.value;
-    const phone_number = target.phone_number.value;
-    //Meteor.call('user.login',phone_number,password);
-    const user = Users.findOne(phone_number);
-    //const test = user.fetch();
-    console.log(password, phone_number);
-    console.log(user);
-    target.password.value = '';
-    target.phone_number.value = '';
-  //Meteor.call('sms.send',phone_number,text);
-}
-})
-
 Template.secure_login3.events({
   'submit .login'(event){
     event.preventDefault();

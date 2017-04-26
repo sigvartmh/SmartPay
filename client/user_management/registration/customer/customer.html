@@ -27,14 +27,32 @@
   <li class="collection-item avatar">
     <i class="material-icons circle md-48">face</i>
     <span class="title">{{first_name}} {{last_name}}</span>
-    <p>{{phone}}</p>
+    <p>{{phone}}<br />
+    account: {{mobile_account}}</p>
   </li>
+</template>
+
+<template name="add_customer">
+  <div class="row" style="margin-top: 0.5cm;">
+    <form class="add">
+    <div class="input-field col s6 offset-s3" style="margin-top: 5.5cm;">
+              <input id="phone_number" type="text" class="validate">
+              <label for="phone_number">Phone Number</label>
+    </div>
+
+    <div class="col s12" style="margin-top: 0.5cm;"><center>
+
+      <input class="btn white accent-1 waves-effect waves-light" type="submit" value="Add" />
+    </center>
+
+    </div>
+    </form>
+  </div>
 </template>
 
 <template name="customer_register">
   <div class="container">
     <center><h4>Register a customer</h4></center>
-    Logged inn as {{ user.profile.name }}
     <div class="row" style="margin-top: 0.5cm;">
       <form class="register">
         <div class="input-field col s6 offset-s3">
@@ -53,9 +71,11 @@
                   <input id="cnic_number" type="text" class="validate">
                   <label for="cnic_number">CNIC-Number</label>
         </div>
+        <center>
         <div class="col s6 offset-s3" style="margin-top: 0.5cm;">
-          <input class="btn red accent-1 waves-effect waves-light" type="submit" value="Register" />
+          <input class="btn white accent-1 waves-effect waves-light" type="submit" value="Register" />
         </div>
+      </center>
       </form>
     </div>
   </div>
@@ -71,7 +91,7 @@
   </div>
   <div class="col s8 offset-s4" style="margin-top: 0.5cm;">
 
-    <input class="btn red accent-1 waves-effect waves-light" type="submit" value="verify" />
+    <input class="btn white accent-1 waves-effect waves-light" type="submit" value="verify" />
   </div>
 </form>
 </div>

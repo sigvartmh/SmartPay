@@ -12,11 +12,17 @@ Template.merchants_register.events({
 
     const phone_number = event.target.phone_number.value;
     const business_name = event.target.business_name.value;
-    Meteor.call('user.register',phone_number,password,business_name,(err)=>{
+    console.log("business:", business_name)
+    const first_name = event.target.first_name.value;
+    const last_name = event.target.last_name.value;
+
+    Meteor.call('user.register',first_name, last_name, phone_number, password, business_name,(err)=>{
       if(err){
         console.log(err)
         Materialize.toast(err.reason, 4000)
       }else{
+        event.target.first_name = '';
+        event.target.last_name = '';
         event.target.password.value = '';
         event.target.password_again.value = '';
         event.target.phone_number.value = '';
@@ -42,7 +48,7 @@ Template.merchant_sms_verification.events({
         Materialize.toast(err.reason, 4000)
       }else{
         event.target.sms_code.value = '';
-        FlowRouter.go('/login3');
+        FlowRouter.go('/login');
       }
     });
   }
@@ -57,5 +63,20 @@ Template.merchant_friends.helpers({
     }else{
       return [];//)
     }
+  }
+})
+
+Template.merchant_friends.events({
+  'click #remove'(event){
+    console.log("remove clicked");
+    const merchant = Meteor.user();
+    const customer = this;
+    Meteor.users.update(merchant._id, {$pop: {"profile.friends": customer._id}})
+  },
+  'click #friend'(event){
+    const customer = this;
+    console.log(this);
+    console.log("friend clicked");
+    FlowRouter.go('/merchants/transfer/'+this.phone)
   }
 })

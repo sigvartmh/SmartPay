@@ -8,6 +8,65 @@ Template.requestPayment.helpers({
   },
 })
 
+Template.success.helpers({
+  customer() {
+    const customer = Customers.findOne({
+      phone: FlowRouter.current().params.customer
+    });
+    console.log(customer)
+    return customer;
+  },
+})
+
+Template.history.helpers({
+  sales(){
+    const merchant = Meteor.user()
+    if(merchant !== undefined){
+    const history = TransactionHistory.find({$or: [{"reciver": merchant._id}, {"sender": merchant._id}]});
+    return history;
+    }
+  }
+})
+
+Template.sale.helpers({
+  recipient(){
+    let recive = Meteor.users.findOne({"_id": this.reciver })
+    console.log("reciver:",recive)
+    if(recive){
+      console.log(reciver.username)
+      return recive.username
+    }else{
+      recive = Customers.findOne({"_id":this.reciver})
+      console.log("Helper return reciver", recive)
+      if(recive) return recive.phone;
+    }
+    console.log("helper:", reciver)
+  },
+  sender_phone(){
+    let send = Meteor.users.findOne({"_id": this.sender})
+    console.log("reciver:", send)
+    if(send){
+      console.log(send.username)
+      return send.username
+    }else{
+      send = Customers.findOne({"_id": this.sender})
+      console.log("Helper return reciver", send)
+      if(reciver) return send.phone;
+    }
+    console.log("helper:", send)
+  }
+})
+
+Template.failure.helpers({
+  customer() {
+    const customer = Customers.findOne({
+      phone: FlowRouter.current().params.customer
+    });
+    console.log(customer)
+    return customer;
+  },
+})
+
 Template.waitingForPayment.helpers({
   customer() {
     const customer = Customers.findOne({
@@ -32,6 +91,25 @@ Template.waitingForPayment.helpers({
       FlowRouter.go('/payment/failure/'+customer.phone+"?amount="+transaction.amount);
     }
     return transaction;
+  }
+})
+
+Template.transaction_friends.helpers({
+  friends(){
+    user = Meteor.user();
+    if(user){
+      console.log(user);
+      return Customers.find({_id:{$in: user.profile.friends}});
+    }else{
+      return [];//)
+    }
+  }
+})
+
+Template.transaction_friends.events({
+  'click'(event){
+    console.log(this);
+    FlowRouter.go('/merchants/requestPayment/'+this.phone);
   }
 })
 

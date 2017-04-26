@@ -29,6 +29,76 @@
   -webkit-animation: text .4s linear .3s;
 }
 
+.input-field input[type=text]:focus + label {
+   color: white;
+}
+.input-field input[type=password]:focus + label {
+   color: white;
+}
+.input-field input[type=tel]:focus + label {
+   color: white;
+}
+.input-field input[type=number]:focus + label {
+   color: white;
+}
+/* label underline focus color */
+ .input-field input[type=text]:focus {
+   color: white;
+   border-bottom: 1px solid white;
+   box-shadow: 0 1px 0 0 white;
+ }
+ .input-field input[type=password]:focus {
+   border-bottom: 1px solid white;
+   box-shadow: 0 1px 0 0 white;
+ }
+ .input-field input[type=tel]:focus {
+   border-bottom: 1px solid white;
+   box-shadow: 0 1px 0 0 white;
+ }
+ .input-field input[type=number]:focus {
+   border-bottom: 1px solid white;
+   box-shadow: 0 1px 0 0 white;
+ }
+ .input-field input[type=text] {
+   color: white;
+   border-bottom: 1px solid white;
+   box-shadow: 0 0px 0 0 white;
+ }
+ .input-field input[type=password] {
+   color: white;
+   border-bottom: 1px solid white;
+   box-shadow: 0 0px 0 0 white;
+ }
+ .input-field input[type=tel] {
+   color: white;
+   border-bottom: 1px solid white;
+   box-shadow: 0 0px 0 0 white;
+ }
+ .input-field input[type=number] {
+   color: white;
+   border-bottom: 1px solid white;
+   box-shadow: 0 0px 0 0 white;
+ }
+.input-field label{
+  color: white;
+}
+
+.container {
+  color: white;
+}
+
+.btn {
+  color: black;
+}
+
+a {
+  color: white;
+}
+
+.collection {
+  color: black;
+}
+
 @-webkit-keyframes dash {
  0% {
    stroke-dashoffset: 1000;
@@ -85,4 +155,8 @@
 @keyframes loadspin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+body {
+  background-color: #2196F3;
 }

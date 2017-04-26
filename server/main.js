@@ -45,17 +45,21 @@ Meteor.methods({
       console.log(user);
       console.log(test);
     },
-    'user.register'(phone_number, password, business_name){
+    'user.register'(first_name, last_name, phone_number, password, business_name){
+      console.log(last_name)
       let user = {
         "username": phone_number,
         "password": password,
         "profile":{
-          "name": business_name,
+          "first_name": first_name,
+          "last_name": last_name,
+          "business_name": business_name,
           "mobile_account": 0,
           "friends": [],
           "CNIC_number": "00-00",
         },
       };
+      console.log(user)
 
       const userAccount = Meteor.users.findOne({username: phone_number})
       if(userAccount){

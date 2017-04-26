@@ -11,7 +11,15 @@ Codes = new Mongo.Collection('verification_codes');
 TempUsers = new Mongo.Collection('temporary_userschema');
 
 const ProfileSchema = new SimpleSchema({
-  name:{
+  first_name:{
+    type: String,
+    label: "Given Name"
+  },
+  last_name:{
+    type: String,
+    label: "Surname"
+  },
+  business_name:{
       type: String,
       label: "Business Name"
   },
