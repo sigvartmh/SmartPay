@@ -1,4 +1,4 @@
-Template.add_founds.events({
+Template.add_funds.events({
   'submit .founds'(event){
     event.preventDefault();
     const amount = Number(event.target.amount.value)
@@ -10,7 +10,7 @@ Template.add_founds.events({
   }
 })
 
-Template.transfer_founds.helpers({
+Template.transfer_funds.helpers({
   customer(){
     const friend =  Customers.findOne({
       phone: FlowRouter.current().params.friend
@@ -20,7 +20,7 @@ Template.transfer_founds.helpers({
   }
 })
 
-Template.transfer_founds.events({
+Template.transfer_funds.events({
   'submit .transfer'(event){
     event.preventDefault();
     const merchant = Meteor.user()

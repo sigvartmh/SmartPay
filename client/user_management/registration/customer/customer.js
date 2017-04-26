@@ -75,7 +75,7 @@ Template.customer_sms_verification.events({
         Materialize.toast(err.reason, 4000)
       }else{
         event.target.sms_code.value = '';
-        FlowRouter.go('/registration/success/'+phone_number);
+        FlowRouter.go('/merchants/register/success');
       }
     });
   }
