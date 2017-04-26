@@ -44,11 +44,46 @@ Picker.route('/sms/recive/', ({}, request, response) => {
         removeTransaction(customer_phone,response);
       }
     }else if(sms.msg.substr(0, "register".length).toLowerCase() === "register"){
-      parseRegistration(sms.from, sms.msg);
+      parseRegistration(sms.from, sms.msg, response);
     }else{
       unknownCommand(response);
     }
 });
+
+function parseRegistration(from, msg, response){
+
+  parse = msg.split(' ')
+  const customer_phone = from.replace("+47", "");
+
+  const customer = {
+    first_name : msg[1],
+    last_name : msg[2],
+    CNIC : msg[3],
+    phone : customer_phone,
+    verified : true,
+    mobile_account : 0
+  }
+  const isValid = Match.test(customer, CustomerSchema);
+  if(isValid){
+    Customers.Insert(customer)
+    response.writeHead(200, {'Content-Type': 'text/xml'});
+    msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+    msg += 'Account for phone number: '+customer_phone + '\n'
+    msg += 'was successfuly created.'
+    msg += '</Message></Response>'
+    response.write(msg);
+    response.end();
+  }else{
+    response.writeHead(200, {'Content-Type': 'text/xml'});
+    msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
+    msg += 'Unkown Command:\nPlease try with yes/no '
+    msg += 'or if you are registrating as a new user '
+    msg += 'follow the format: register &lt;first name&gt; &lt;last name&gt; &lt;CNIC&gt;'
+    msg += '</Message></Response>'
+    response.write(msg);
+    response.end();
+  }
+}
 
 function unknownCommand(response){
   response.writeHead(200, {'Content-Type': 'text/xml'});
