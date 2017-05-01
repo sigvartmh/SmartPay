@@ -6,6 +6,7 @@ import { Picker } from 'meteor/meteorhacks:picker';
 import SimpleSchema from 'simpl-schema';
 //import { CustomerSchema } from '../common.js';
 
+
 const CustomerSchema = new SimpleSchema({
   first_name:{
       type: String,
@@ -123,7 +124,7 @@ function parseRegistration(from, msg, response){
     const exsists = Customers.findOne({phone: customer_phone})
     console.log("exsist": exsists);
     if(!exsists){
-      Customers.Insert(customer)
+      Customers.insert(customer)
       response.writeHead(200, {'Content-Type': 'text/xml'});
       msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
       msg += 'Account for phone number: '+customer_phone + '\n'
@@ -200,12 +201,12 @@ function removeTransaction(customer_phone, response){
   activeTransaction = Transactions.findOne({sender: customer._id});
 
   if(activeTransaction){
-    Transactions.remove({_id: activeTransaction._id});
+    //Transactions.remove({_id: activeTransaction._id});
     response.statusCode = 204; //No Content
     response.end();
   }
 
-  activeTransaction = Transactions.findOne({sender: customer._id});
+  //activeTransaction = Transactions.findOne({sender: customer._id});
   console.log("Is Transaction Removed: ", activeTransaction );
 }
 
@@ -233,7 +234,7 @@ function updateTransaction(customer_phone, status, response){
         {$set:
           {status: "declined"}
         });
-      removeTransaction(customer_phone)
+      //removeTransaction(customer_phone)
       return false
     }else if(activeTransaction){
       Transactions.update({_id: activeTransaction._id},
