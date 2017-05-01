@@ -1,5 +1,5 @@
-# TelePay
-##Proof-of-concept
+# SmartPay
+## Proof-of-concept
 
 Install [meteor](https://www.meteor.com/install)
 
