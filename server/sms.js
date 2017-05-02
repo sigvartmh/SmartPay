@@ -90,7 +90,7 @@ function checkBalance(from, response){
   if(customer){
     response.writeHead(200, {'Content-Type': 'text/xml'});
     msg = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message>'
-    msg += 'Your account balance is: '+ customer.mobile_account + '\n'
+    msg += 'Your account balance is: '+ customer.mobile_account + '₹\n'
     msg += '</Message></Response>'
     response.write(msg);
     response.end();
