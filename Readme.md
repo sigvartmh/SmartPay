@@ -9,7 +9,7 @@ meteor npm install
 ```
 
 ### Running the server and website
-Run it as a website on a server you will have to modifie the `dev.env.template` to add your twilio API key and number after this is done you can copy the template `cp dev.env.template dev.env`.
+Run it as a website on a server you will have to modifie the `dev.env.template` to add your twilio API key and number after this is done you can copy the template `cp dev.env.template dev.env` or just source the template instead.
 
 ```bash
 source dev.env
