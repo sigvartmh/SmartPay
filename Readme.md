@@ -4,13 +4,15 @@
 Install [meteor](https://www.meteor.com/install)
 
 ```git clone https://github.com/sigvartmh/SmartPay```
-
-```meteor install```
+```meteor npm install```
 
 ### Running the server and website
-Run it as a website on a server just do
+Run it as a website on a server you will have to modifie the `dev.env.template` to add your twilio API key and number after this is done you can copy the template `cp dev.env.template dev.env`.
 
-```meteor run```
+```
+source dev.env
+meteor
+```
 
 It will now be available on [localhost:3000](https://localhost:3000) port can be
 specified with the `-p` option
