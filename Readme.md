@@ -1,6 +1,6 @@
 # SmartPay Proof-of-concept Application
 
-## Prerequisit
+## Prerequisite
 * [node.js](https://nodejs.org/en/)
 * [meteor](https://www.meteor.com/install)
 * [Twilio account](https://www.twilio.com/)
@@ -25,7 +25,7 @@ meteor
 It will now be available on [localhost:3000](https://localhost:3000) port can be
 specified with the `-p` option
 
-### Prerequisit mobile
+### Prerequisite mobile
 
 To run the  application on an Android emulator or phone requires that you have the android SDK and emulator installed more information on it can be found [here](https://www.meteor.com/tutorials/blaze/running-on-mobile) or try
 
