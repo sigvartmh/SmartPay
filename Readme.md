@@ -1,6 +1,12 @@
 # SmartPay Proof-of-concept Application
 
+## Prerequisit
+* [node.js](https://nodejs.org/en/)
+* [meteor](https://www.meteor.com/install)
+* [Twilio account](https://www.twilio.com/)
+
 ## Installation guide
+
 Install [meteor](https://www.meteor.com/install)
 
 ```bash
@@ -9,7 +15,7 @@ meteor npm install
 ```
 
 ### Running the server and website
-Run it as a website on a server you will have to modifie the `dev.env.template` to add your twilio API key and number after this is done you can copy the template `cp dev.env.template dev.env` or just source the template instead.
+Run it as a website on a server you will have to modifie the `dev.env.template` to add your twilio API key and number after this is done you can copy the template `cp dev.env.template dev.env` or just source the template instead. If you don't have number just don't fill it in if you just want to test the application without SMS capability.
 
 ```bash
 source dev.env
@@ -19,10 +25,18 @@ meteor
 It will now be available on [localhost:3000](https://localhost:3000) port can be
 specified with the `-p` option
 
+### Prerequisit mobile
+
 To run the  application on an Android emulator or phone requires that you have the android SDK and emulator installed more information on it can be found [here](https://www.meteor.com/tutorials/blaze/running-on-mobile) or try
 
 ```bash
 meteor install-sdk android
+```
+
+or for iOS
+
+```bash
+meteor install-sdk ios
 ```
 
 ### Running on Android
