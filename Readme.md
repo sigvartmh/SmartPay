@@ -5,6 +5,9 @@ Install [meteor](https://www.meteor.com/install)
 
 ```git clone https://github.com/sigvartmh/SmartPay```
 
+```meteor install```
+
+### Running the server and website
 Run it as a website on a server just do
 
 ```meteor run```
@@ -12,8 +15,7 @@ Run it as a website on a server just do
 It will now be available on [localhost:3000](https://localhost:3000) port can be
 specified with the `-p` option
 
-To run the  application on an Android emulator or phone requires that you have the android SDK and emulator installed more information on it can be found [here](https://www.meteor.com/tutorials/blaze/running-on-mobile).
-or try
+To run the  application on an Android emulator or phone requires that you have the android SDK and emulator installed more information on it can be found [here](https://www.meteor.com/tutorials/blaze/running-on-mobile) or try
 
 ```meteor install-sdk android```
 
